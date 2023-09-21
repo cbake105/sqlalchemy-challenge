@@ -27,8 +27,7 @@ In this section, you’ll use Python and SQLAlchemy to do a basic climate analys
 
 5. Link Python to the database by creating a SQLAlchemy session.
 
-IMPORTANT
-Remember to close your session at the end of your notebook.
+ - IMPORTANT: Remember to close your session at the end of your notebook.
 
 5. Perform a precipitation analysis and then a station analysis by completing the steps in the following two subsections.
 
@@ -99,3 +98,13 @@ Now that you’ve completed your initial analysis, you’ll design a Flask API b
 - For a specified start, calculate TMIN, TAVG, and TMAX for all the dates greater than or equal to the start date.
 
 - For a specified start date and end date, calculate TMIN, TAVG, and TMAX for the dates from the start date to the end date, inclusive.
+
+
+# Cite 
+AskBCS Learning Assistant
+
+Hitarth https://smuvirtdatapt-yzn4480.slack.com/archives/C05SS9HEWQ6/p1695128826437149
+
+Link: https://docs.sqlalchemy.org/en/20/core/sqlelement.html#sqlalchemy.sql.expression.func
+
+Class office hours
