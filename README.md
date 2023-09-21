@@ -1,4 +1,6 @@
 # SQL Alchemy-Challenge
+## Surfs Up! 
+<img width="651" alt="Screenshot 2023-09-21 at 1 33 11 PM" src="https://github.com/cbake105/sqlalchemy-challenge/assets/133677209/f1d4dbee-81e2-49b7-a6ee-5ce17c19bf93">
 
 ## Before You Begin
 1. Create a new repository for this project called sqlalchemy-challenge. Do not add this assignment to an existing repository.
