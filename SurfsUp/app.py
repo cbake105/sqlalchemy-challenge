@@ -10,8 +10,10 @@ import datetime as dt
 #################################################
 # Database Setup
 #################################################
+
+
 # create engine
-engine = create_engine("sqlite:///./Resources/hawaii.sqlite")
+engine = create_engine("sqlite:///Resources/hawaii.sqlite")
 
 # reflect an existing database into a new model
 Base = automap_base()
@@ -40,15 +42,15 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-return (f"<h1> <b> Welcome to the Hawaiian Climate Page <b/></h1>"
+    return (f"<h1> <b> Welcome to the Hawaiian Climate Page <b/></h1>"
         f"<br/>"
         f"<ol>"
         f"<strong><h2> Available Pages : </h2></strong><br/>"
-        f"<li><h3>/api/v1.0/precipiation </h3><br/>"
-        f"<li><h3>/api/v1.0/stations </h3><br/>"
-        f"<li><h3>/api/v1.0/tobs </h3><br/>"
-        f"<li><h3>/api/v1.0/temp/<start></h3><br/>"
-        f"<li><h3>/api/v1.0/temp/<start>/<end> </h3><br/>"
+        f"<li><h3> Precipitation - /api/v1.0/precipiation </h3><br/>"
+        f"<li><h3> List of Stations - /api/v1.0/stations </h3><br/>"
+        f"<li><h3> Most Active Stations - /api/v1.0/tobs </h3><br/>"
+        f"<li><h3> Temp Details: Start dates - /api/v1.0/temp/<start></h3><br/>"
+        f"<li><h3> Temp Details: Start and End dates - /api/v1.0/temp/<start>/<end> </h3><br/>"
         f"<ol>"
         )
         
@@ -73,13 +75,13 @@ def precipitation():
 # List station names
 
 @app.route("/api/v1.0/stations")
-    def stations():
+def stations():
         session = Session(engine)
         scores = session.query(Station.station)
         session.close()
         
         # Convert to list
-        all_station_names = list(np.ravel(results))
+        all_station_names = list(np.ravel(scores))
         return jsonify (all_station_names)
         
 # Most active stastoins
@@ -90,9 +92,9 @@ def active_stations():
     last_year = dt.date(2017,8,23) - dt.timedelta(days=365)
     scores = session.query(Measurement.tobs).\
         filter(Measurement.station == "USC00519281").\
-        filter(measurement.date >= last_year).all()
+        filter(Measurement.date >= last_year).all()
     session.close()
-    scores = list(np.ravel(results))
+    scores = list(np.ravel(scores))
     return jsonify (scores)
     
 # Return JSON min, max and avg for specific start /start-end range
@@ -102,9 +104,9 @@ def active_stations():
 def start_end(start=None, end=None):
 
     # Select statement
-    min_max_avg = [func.min(Measurement).tobs),
-                   func.max(Measurement).tobs),
-                   func.avg(Measurement).tobs)]
+    min_max_avg = [func.min(Measurement.tobs),
+                   func.max(Measurement.tobs),
+                   func.avg(Measurement.tobs)]
                    
     if not end:
     
@@ -115,7 +117,7 @@ def start_end(start=None, end=None):
         session.close()
         
         # Convet to list
-        temp = list(np.ravel(results))
+        temp = list(np.ravel(scores))
         return jsonify (temp)
         
     
@@ -123,10 +125,10 @@ def start_end(start=None, end=None):
     start = dt.datetime.strptime(start, "%m%d%Y")
     end = dt.datetime.strptime(end, "%m%d%Y")
     scores = session.query(*min_max_avg).filter(Measurement.date >= start).\
-                filter(Measurement.date >= start.\
+                filter(Measurement.date >= start).\
                 filter(Measurement.date <= end).all()
     session.close()
-    temps = list(np.ravel(results))
+    temps = list(np.ravel(scores))
     return jsonify(temps=temps)
     
 # Running the app
